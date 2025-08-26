@@ -3,23 +3,37 @@
 int global_int = 14;
 static int static_int = 15;
 
+void recursive(int depth) {
+	int local_var = depth;
+
+	std::cout << "Depth " << depth << " local_var @ " << &local_var << "\n";
+	if (depth < 5) {
+		recursive(depth + 1);
+	}
+}
+
 int main() {
-	int local_int1 = 16;
-	int local_int2 = 17;
-	int local_int3 = 18;
+	int local_int = 16;
 
 	int* heap_int = new int;
 
-	*heap_int = 19;
+	*heap_int = 17;
 
-	std::cout << "Address of Global Integer: " << &global_int << " | Value: " << global_int << "\n";
-	std::cout << "Address of Static Integer: " << &static_int << " | Value: " << static_int << "\n";
-	std::cout << "Address of Local Integer1: " << &local_int1 << " | Value: " << local_int1 << "\n";
-	std::cout << "Address of Local Integer2: " << &local_int2 << " | Value: " << local_int2 << "\n";
-	std::cout << "Address of Local Integer3: " << &local_int3 << " | Value: " << local_int3 << "\n";
-	std::cout << "  Address of Heap Integer: " << &heap_int << " | Value: " << *heap_int << "\n";
-	std::cout << " Address of Main function: " << (void*)&main << "\n";
+	// Display addresses and values for declared variables and main function
+	std::cout << "     Address of Global Integer: " << &global_int << " | Value: " << global_int << "\n";
+	std::cout << "     Address of Static Integer: " << &static_int << " | Value: " << static_int << "\n";
+	std::cout << "      Address of Local Integer: " << &local_int << " | Value: " << local_int << "\n";
+	std::cout << "       Address of Heap Integer: " << &heap_int << " | Value: " << *heap_int << "\n";
+	std::cout << "      Address of Main function: " << (void*)&main << "\n";
+	std::cout << " Address of Recursive function: " << (void*)&recursive << "\n";
 
+	std::cout << "\n";
+
+	// Show stack behavior in recursive function
+	recursive(1);
+
+	// Clean up
+	std::cout << "\n";
 	delete heap_int;
 
 	return 0;
