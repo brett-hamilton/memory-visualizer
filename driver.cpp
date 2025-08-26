@@ -32,6 +32,15 @@ int main() {
 	// Show stack behavior in recursive function
 	recursive(1);
 
+	std::cout << "\n";
+
+	// Show heap memory behavior in a loop
+	for (int i = 1; i < 6; i++) {
+		int* new_heap_int = new int(i);
+		std::cout << "Heap alloc " << i << " @ " << new_heap_int << "\n";
+		delete new_heap_int;
+	}
+
 	// Clean up
 	std::cout << "\n";
 	delete heap_int;
